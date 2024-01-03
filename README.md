@@ -7,6 +7,13 @@ the demo of the app and description are below
 https://github.com/Khushnu/flutter_task_cruv/assets/34332682/8edd9310-f256-4c4e-8f56-5315f45716cf
 
 The indian railway seat booking app created using flutter framework with provider statemanagement 
+the architecture of app contian the screens, model, statemanagement, widget and themestyle. 
+the screens contains the screens of app, 
+model contain the seat model, 
+statemanagment contian the function of add, remove, search with provider. this class extends with changenotifier. 
+widget contains common widget like cabinscreen, textformfield etc. 
+themestyle contians colors of app.
+
 the app contain two screens one is seat selection ui and other one is reserved seats ui 
 the complexity of rendering seats was little complex it is 2d array so to takle this issue i create a cabin seat widget where i passed seat index type of seat and search text
 the then on selection screen listview.builder used to create seats now to render seats upper seat no 1, middle no 2, lower seat no 3, side up seat no 7 and side up seats etc. 
@@ -19,5 +26,6 @@ the search function of provider i called in inouttextformfieldwidget onchanged w
 the confirm selection button used to navigate to reserved screen where i watched the reservedlist with help of provider the ui contain the seats which was selected from selection ui 
 the reserved screen shows the total reserved seats and expansion tile widget to make the ui more attractive. to hide the keyboard the focusscope function was used when to tap anywhere 
 on selection screen it hide the keyboard also the icon i used in searchbar when it clicked the searchbar is cleared and the keyboard will hide. 
+
 
 thank you.
