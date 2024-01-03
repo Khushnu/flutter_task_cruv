@@ -3,8 +3,6 @@ import 'package:flutter_task_cruv/Screens/reserved_seats_screen.dart';
 import 'package:flutter_task_cruv/Statemanagement/seats_state.dart';
 import 'package:flutter_task_cruv/Widgets/cabin_seat_widget.dart';
 import 'package:flutter_task_cruv/Widgets/input_textfield_widget.dart';
-import 'package:flutter_task_cruv/Widgets/search_button_widget.dart';
-import 'package:flutter_task_cruv/Widgets/topwidget.dart';
 import 'package:flutter_task_cruv/main.dart';
 import 'package:flutter_task_cruv/themestyle.dart';
 import 'package:provider/provider.dart';
@@ -20,78 +18,72 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
   final searchBar = TextEditingController();
   final scrollcontroller = ScrollController();
 
-  scrollTo(String search){
-  
-  }
-
+  scrollTo(String search) {}
 
   @override
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.sizeOf(context).height;
     screenWidth = MediaQuery.sizeOf(context).width;
     return Scaffold(
-     
+      resizeToAvoidBottomInset: false,
       body: GestureDetector(
-        onTap: (){
+        onTap: () {
           FocusScope.of(context).unfocus();
         },
-        child: Stack(
-          children: [
-            Image.asset('Assets/bg.png'),
-            Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
+        child: Stack(children: [
+          Image.asset('Assets/bg.png'),
+          Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 135, 
-                horizontal: 60).copyWith(bottom: 20),
-                child: Align( 
+                padding:
+                    const EdgeInsets.symmetric(vertical: 135, horizontal: 60)
+                        .copyWith(bottom: 20),
+                child: Align(
                   alignment: Alignment.centerLeft,
-                  child: 
-                       Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: const [
-                                BoxShadow(
-                                    color: Colors.grey,
-                                    blurRadius: 4,
-                                    offset: Offset(0, 2))
-                              ]),
-                          child: InputTextFieldWidget(
-                            textEditingController: searchBar,
-                            ontap: (){
-                              if(searchBar.text.isNotEmpty){
-                                 searchBar.clear();
-                              }
-                             
-                            },
-                            onchnged: (v){
-                              searchBar.text=v;
-                              print(v);
-                              setState(() {
-                              });
-                              context.read<SeatsState>().searchSeats(v);
-                             
-                            }, ),
-                        ),
-                      ),
-                      
-                      // SearchButtonWidget(ontap: () {})
-                    
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 4,
+                              offset: Offset(0, 2))
+                        ]),
+                    child: InputTextFieldWidget(
+                      textEditingController: searchBar,
+                      ontap: () {
+                        if (searchBar.text.isNotEmpty) {
+                          searchBar.clear();
+                          FocusScope.of(context).unfocus();
+                        }
+                      },
+                      onchnged: (v) {
+                        searchBar.text = v;
+                        print(v);
+                        setState(() {});
+                        context.read<SeatsState>().searchSeats(v);
+                      },
+                    ),
+                  ),
+                ),
+
+                // SearchButtonWidget(ontap: () {})
               ),
               Expanded(
                 child: ListView.builder(
                   controller: scrollcontroller,
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   itemCount: 10,
                   itemBuilder: (_, index) {
-          //             var seats = context.read<SeatsState>().searchSeats(searchBar.text);
-          //     if(seats.isNotEmpty){
-          // final targetindex = seats.first.seatindex! ~/3 ;
-          // scrollcontroller.animateTo(index * 60 ,
-          //  duration: Duration(milliseconds: 500), 
-          //  curve: Curves.easeIn);
-          //     }
+                    //             var seats = context.read<SeatsState>().searchSeats(searchBar.text);
+                    //     if(seats.isNotEmpty){
+                    // final targetindex = seats.first.seatindex! ~/3 ;
+                    // scrollcontroller.animateTo(index * 60 ,
+                    //  duration: Duration(milliseconds: 500),
+                    //  curve: Curves.easeIn);
+                    //     }
                     return Column(
                       children: [
                         Row(
@@ -122,10 +114,10 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                                         width: 5,
                                       ),
                                       CabinSeatWidget(
-                                          indexSeat: (2 + index * 8),
-                                          typeofSeat: 'Middle', 
-                                          searchText: searchBar.text,), 
-                                          
+                                        indexSeat: (2 + index * 8),
+                                        typeofSeat: 'Middle',
+                                        searchText: searchBar.text,
+                                      ),
                                       const SizedBox(
                                         width: 5,
                                       ),
@@ -178,7 +170,8 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                                 Transform.translate(
                                   offset: const Offset(0, -10),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       CabinSeatWidget(
                                           indexSeat: (6 + index * 8),
@@ -230,23 +223,30 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                     );
                   },
                 ),
-              ), 
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (_)=> const ReservationSeatsScreen()));
-                },
-                style: ElevatedButton.styleFrom(
-                  fixedSize: Size(screenWidth, 48), 
-                  backgroundColor: buttoncolor
-                ),
-                 child: const Text('Confirm Selection', style: TextStyle(color: Colors.white, fontSize: 15),)),
-              ), 
-               const SizedBox(height: 25,)
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const ReservationSeatsScreen()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: Size(screenWidth, 48),
+                        backgroundColor: buttoncolor),
+                    child: const Text(
+                      'Confirm Selection',
+                      style: TextStyle(color: Colors.white, fontSize: 15),
+                    )),
+              ),
+              const SizedBox(
+                height: 25,
+              )
             ],
           ),
-          ]
-        ),
+        ]),
       ),
     );
   }
