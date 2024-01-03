@@ -5,7 +5,11 @@ import 'package:flutter_task_cruv/themestyle.dart';
 class InputTextFieldWidget extends StatefulWidget {
   final TextEditingController textEditingController; 
   final Function(String) onchnged;
-  const InputTextFieldWidget({super.key, required this.textEditingController, required this.onchnged});
+  final Function() ontap;
+  const InputTextFieldWidget({super.key, 
+  required this.textEditingController, 
+  required this.onchnged, 
+  required this.ontap});
 
   @override
   State<InputTextFieldWidget> createState() => _InputTextFieldWidgetState();
@@ -19,6 +23,7 @@ class _InputTextFieldWidgetState extends State<InputTextFieldWidget> {
       keyboardType: TextInputType.number,
       onChanged:widget.onchnged ,
       decoration: InputDecoration(
+        suffixIcon: IconButton(onPressed: widget.ontap, icon: widget.textEditingController.text.isNotEmpty ? Icon(Icons.close) : Icon(Icons.search)),
         fillColor: Colors.white, 
         filled: true,
       

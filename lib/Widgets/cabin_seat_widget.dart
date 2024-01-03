@@ -47,7 +47,7 @@ class _CabinSeatWidgetState extends State<CabinSeatWidget> {
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
                 color: (widget.searchText == widget.indexSeat.toString() || seats.contains(seatModel)) ? borderColor : Colors.transparent,
-                width: 2,
+                width: 3,
               ),
               color: (seats.contains(seatModel)) ? primarySelectionColor : const Color(0xffCEEAFF),
             ),

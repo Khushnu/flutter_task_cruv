@@ -17,7 +17,7 @@ class _ReservationSeatsScreenState extends State<ReservationSeatsScreen> {
     var seats = context.watch<SeatsState>().seats;
     return Scaffold(
       body: seats.isEmpty
-          ? Center(
+          ? const Center(
               child: Text(
                 'No Reservation found',
                 style: TextStyle(color: Colors.black, fontSize: 20),
@@ -37,7 +37,7 @@ class _ReservationSeatsScreenState extends State<ReservationSeatsScreen> {
                         ),
                         Text(
                           seats.length.toString(),
-                          style: TextStyle(fontSize: 20),
+                          style: const TextStyle(fontSize: 20),
                         )
                       ],
                     ),
